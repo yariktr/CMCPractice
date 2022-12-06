@@ -430,6 +430,7 @@ int execute(char ***commands, int len, int backmode){
 			case -1: break;
 			case 0:	
 				if ((i+1) != len) dup2(fd[1], 1);
+				    if (backmode) signal(SIGINT, SIG_IGN);
 					close(fd[0]);
 					close(fd[1]);
 				execvp(commands[i][0], commands[i]);
@@ -454,7 +455,7 @@ int execute(char ***commands, int len, int backmode){
 void find_rein(char ***commands, int *len){
 	int nlen = *len, k = 0, status;
 	int fd[2], rein[3] = {}, backmode = 0;
-	char *input = NULL, *output = NULL;
+	char *input = NULL, *output = NULL; *output1 = NULL;
 	
 	char ***ncoms = (char***)malloc(sizeof(char**) * (*len));
 	for (int i = 0; i < *len; i++){
@@ -469,7 +470,7 @@ void find_rein(char ***commands, int *len){
 				nlen--;
 			}
 			if (rein[2]) {
-				output = commands[i][1];
+				output1 = commands[i][1];
 				nlen--;
 			}
 			
@@ -492,8 +493,8 @@ void find_rein(char ***commands, int *len){
 				dup2(fd[1], 1);
 				close(fd[1]);
 			}
-			if (output) {
-				fd[1] = open(output, O_WRONLY | O_CREAT | O_APPEND, 0666);
+			if (output1) {
+				fd[1] = open(output1, O_WRONLY | O_CREAT | O_APPEND, 0666);
 				dup2(fd[1], 1);
 				close(fd[1]);
 			}
@@ -513,7 +514,7 @@ void find_rein(char ***commands, int *len){
 	}
 
 int main(void){
-    signal(SIGINT, SIG_IN);
+    signal(SIGINT, SIG_IGN);
 	list *words;
 	int comlen = 0, len1;
 	char **wordsm, ***coms, ***ncoms;
