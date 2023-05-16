@@ -1,0 +1,26 @@
+program
+{
+  int y = 1, c, a = 51, b = 6;
+  string x = "abc";
+  real d = 1.667;
+  if (a >= 100)
+  {
+    read (y);
+    write (y);
+    write (x);
+  }
+  else
+  {
+    c = a = 121;
+    d = 2 * d;
+  }
+  while (c > 100)
+  {
+    c = c - 5;
+    write (c);
+    x = x + "step";
+    break;
+  }
+  write (x);
+  write ("ERROR not detected");
+}
