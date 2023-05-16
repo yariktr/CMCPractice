@@ -1,0 +1,31 @@
+program
+{
+  int c = 117, a = 47, b = 4;
+  int y, k, i, z;
+  string x;
+  real d = 1.68;
+  if (a >= 10)
+  {
+    read (y);
+    write (y);
+    read (x);
+  }
+  else
+  {
+    c = 111;
+    d = 2 * d;
+  }
+  while (c > 100)
+  {
+    c = c - 8;
+    write (c);
+    x = x + "step";
+  }
+  do
+  {
+    d = d / a;
+  }while(d > 1)
+  write (x);
+  write (d);
+  write ("ERROR not detected");
+}
